@@ -1,6 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### config file
 config/*
+*.conf
 
 ### Go template
 # Binaries for programs and plugins
