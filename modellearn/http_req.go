@@ -48,7 +48,7 @@ func formatJson(jsonapi []byte) *JsonData {
 }
 func ErrPrint(err error) {
 	if err != nil {
-		log.Fatalln(err)
+		log.Panic(err)
 		os.Exit(1)
 	}
 }
