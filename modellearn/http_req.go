@@ -66,5 +66,5 @@ func httpRequest(config *Config) []byte {
 func main() {
 	file := "modellearn/config/http_req.conf"
 	c := formatJson(httpRequest(getUrl(file)))
-	fmt.Printf("%#v", c.Data.Instances[0].HOSTNAME)
+	fmt.Printf("%v", c.Data.Instances[0].HOSTNAME)
 }
