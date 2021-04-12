@@ -10,7 +10,25 @@ import (
 )
 
 type Config struct {
-	URL string `json:"url"`
+	URL    string `json:"url"`
+	Cookie string `json:"cookie"`
+}
+type HostInfo struct {
+	HOSTNAME    string `json:"hostname"`
+	TYPE        string `json:"type"`
+	IDC         string `json:"idc"`
+	VENDOR      string `json:"vendor"`
+	HostID      string `json:"host_id"`
+	InternalIp  string `json:"internal_ip"`
+	RackName    string `json:"rack_name"`
+	AssetNumber string `json:"asset_number"`
+	BelongTo    string `json:"belong_to"`
+}
+type Instances struct {
+	Instances []*HostInfo `json:"instances"`
+}
+type JsonData struct {
+	Data *Instances `json:"data"`
 }
 
 func getUrl(path string) *Config {
@@ -21,16 +39,23 @@ func getUrl(path string) *Config {
 	ErrPrint(err)
 	return &config
 }
+func formatJson(jsonapi []byte) *JsonData {
+	data := JsonData{}
+	err := json.Unmarshal(jsonapi, &data)
+	ErrPrint(err)
+	return &data
+
+}
 func ErrPrint(err error) {
 	if err != nil {
 		log.Fatalln(err)
 		os.Exit(1)
 	}
 }
-func httpRequest(url string) []byte {
+func httpRequest(config *Config) []byte {
 	client := &http.Client{}
-	request, err := http.NewRequest("GET", url, nil)
-	request.Header.Set("Cookie", "_AJSESSIONID=cb5b76a9782f10ae222a73147ea67331; username=songjingang; _gitlab_session=8f8eb29a39b38fbe1d344602a440765e; experimentation_subject_id=eyJfcmFpbHMiOnsibWVzc2FnZSI6IkltWXlOVGhoT0dNNUxURTVOV0V0TkdZeU1pMWhZakl4TFRBM1lUWXlNbVJqTUdVeU5pST0iLCJleHAiOm51bGwsInB1ciI6ImNvb2tpZS5leHBlcmltZW50YXRpb25fc3ViamVjdF9pZCJ9fQ; known_sign_in=Mzk3ODI3N0RiUnhNQm5KRXkvdTIvWmZSUyszUU5Ea29vcVJ6clJjeGM5d1gvQ2p3L2d4eTZqb0Z6RXFDNlRmNytHZXBwcm9NbWVFcmJUWFA3eDBkdXZuVVo0Uk9QaVhnTENrOUZ3eklDODlHdlpLb3YvTjRjZEs4M0hFR0hmK3otLTRSSGlNM1RFTHJWbU1WRFdiTXF1SHc9PQ")
+	request, err := http.NewRequest("GET", config.URL, nil)
+	request.Header.Set("Cookie", config.Cookie)
 	ErrPrint(err)
 	reqs, err := client.Do(request)
 	ErrPrint(err)
@@ -40,9 +65,6 @@ func httpRequest(url string) []byte {
 }
 func main() {
 	file := "modellearn/config/http_req.conf"
-	a := getUrl(file)
-	fmt.Println(a.URL)
-	b := httpRequest(a.URL)
-	fmt.Printf(string(b))
-
+	c := formatJson(httpRequest(getUrl(file)))
+	fmt.Printf("%#v", c.Data.Instances[0].HOSTNAME)
 }

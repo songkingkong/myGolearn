@@ -12,7 +12,7 @@ cap()可以用来查看数组或slice的容量,在容量不足时增长是乘以
 var s0 = make([]string, 2)
 
 /*
-切片的声明时没有标明参数的个数，如果带有个数那声明的事list
+切片的声明时没有标明参数的个数，如果带有个数那声明的是list
 */
 var s1 []int
 var s2 = []string{"eee", "fff"}
