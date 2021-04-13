@@ -31,6 +31,12 @@ type JsonData struct {
 	Data *Instances `json:"data"`
 }
 
+func ErrPrint(err error) {
+	if err != nil {
+		log.Panic(err)
+		os.Exit(1)
+	}
+}
 func getUrl(path string) *Config {
 	content, err := ioutil.ReadFile(path)
 	ErrPrint(err)
@@ -45,12 +51,6 @@ func formatJson(jsonapi []byte) *JsonData {
 	ErrPrint(err)
 	return &data
 
-}
-func ErrPrint(err error) {
-	if err != nil {
-		log.Panic(err)
-		os.Exit(1)
-	}
 }
 func httpRequest(config *Config) []byte {
 	client := &http.Client{}
