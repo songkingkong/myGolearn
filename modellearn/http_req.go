@@ -50,7 +50,6 @@ func formatJson(jsonapi []byte) *JsonData {
 	err := json.Unmarshal(jsonapi, &data)
 	ErrPrint(err)
 	return &data
-
 }
 func httpRequest(config *Config) []byte {
 	client := &http.Client{}
