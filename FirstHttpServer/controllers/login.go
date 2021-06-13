@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"FirstHttpServer/models"
+	"encoding/json"
 	"github.com/astaxie/beego"
 )
 
@@ -8,8 +10,13 @@ type LoginController struct {
 	beego.Controller
 }
 
-func (l *LoginController) post() {
-
-	l.Ctx.Output.Header("Content-Type", "message/http")
-	l.Ctx.Output.Header("Cache-Control", "no-cache, no-store, must-revalidate")
+func (c *LoginController) GetUser() {
+	c.TplName = "login.tpl"
+}
+func (c *LoginController) SetUser() {
+	user := new(models.User)
+	user.UserName = c.GetString("username")
+	user.PassWd = c.GetString("password")
+	c.Data["json"], _ = json.Marshal(user)
+	c.ServeJSON()
 }

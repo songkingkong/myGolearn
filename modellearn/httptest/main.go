@@ -13,15 +13,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-/*import (
-	_ "FirstHttpServer/routers"
-	"github.com/astaxie/beego"
-)
-
-func main() {
-	beego.Run()
-}*/
-
 type JsonResult struct {
 	Code int `json:"code"`
 	Msg  models.User
