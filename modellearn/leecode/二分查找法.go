@@ -2,14 +2,27 @@ package main
 
 import "fmt"
 
-var list = [...]int{1,2,3,4,5,6,7}
+var list = []int{1, 2, 3, 4, 5, 6, 7}
 var v = 2
 
-func erFen(key int, listArg [7]int) {
-	for i := range listArg{
-		fmt.Println(i,key)
+func binarySearch(arr []int, k int) int {
+	l := 0
+	r := len(arr) - 1
+
+	for l <= r {
+		mid := (l + r) / 2
+		if k == arr[mid] {
+			return mid
+		}
+		if k < arr[mid] {
+			r = mid - 1
+		} else {
+			l = mid + 1
+		}
 	}
+	return -1
 }
-func main()  {
-	erFen(v,list)
+func main() {
+	a := binarySearch(list, v)
+	fmt.Println(a)
 }
