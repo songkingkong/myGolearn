@@ -46,9 +46,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 		u.PassWd = strings.Join(r.Form["password"], "")
 
 		msg := JsonResult{Msg: u}
-		if err != nil {
-			fmt.Println(err)
-		}
 
 		userpasswd, err := u.SelectUser(u.UserName)
 		if err != nil {

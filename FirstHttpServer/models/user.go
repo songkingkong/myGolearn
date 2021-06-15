@@ -6,8 +6,8 @@ import (
 )
 
 type User struct {
-	UserName string `orm:"PK"`
-	PassWd   string `orm:"size(100)"`
+	UserName string `json:"user_name" orm:"PK" orm:"size(100)"`
+	PassWd   string `json:"pass_wd" orm:"size(100)"`
 }
 
 func init() {
@@ -21,9 +21,10 @@ func init() {
 }
 func (u *User) AddUser(username string, passwd string) error {
 	o := orm.NewOrm()
-	user := new(User)
-	user.UserName = username
-	user.PassWd = passwd
+	user := User{
+		UserName: username,
+		PassWd:   passwd,
+	}
 	_, err := o.Insert(&user)
 	if err != nil {
 		return err

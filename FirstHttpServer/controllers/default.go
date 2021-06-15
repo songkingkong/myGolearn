@@ -9,5 +9,5 @@ type MainController struct {
 }
 
 func (c *MainController) Index() {
-	c.TplName = "login.tpl"
+	c.TplName = "index.tpl"
 }
