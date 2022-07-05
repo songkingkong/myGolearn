@@ -1,4 +1,4 @@
-package main
+package syntax
 
 import (
 	"encoding/json"
@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"testing"
 )
 
 type Config struct {
@@ -60,9 +61,12 @@ func httpRequest(config *Config) []byte {
 	ErrPrint(err)
 	defer reqs.Body.Close()
 	bytes, err := ioutil.ReadAll(reqs.Body)
+	if err != nil {
+		log.Panic(err)
+	}
 	return bytes
 }
-func main() {
+func TestHttpReq(t *testing.T) {
 	file := "modellearn/config/http_req.conf"
 	c := formatJson(httpRequest(getUrl(file)))
 	fmt.Printf("%v", c.Data.Instances[0].HOSTNAME)

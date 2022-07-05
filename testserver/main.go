@@ -5,12 +5,9 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	"myGolearn/testserver/models"
 	"net/http"
 	"strings"
-
-	"httptest/models"
-
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type JsonResult struct {
@@ -18,7 +15,7 @@ type JsonResult struct {
 	Msg  models.User
 }
 
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
+func sayHelloName(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		t, err := template.ParseFiles("login.html")
 		if err != nil {
@@ -47,11 +44,11 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		msg := JsonResult{Msg: u}
 
-		userpasswd, err := u.SelectUser(u.UserName)
+		userPasswd, err := u.SelectUser(u.UserName)
 		if err != nil {
 			fmt.Println(err)
 		}
-		if u.PassWd == userpasswd {
+		if u.PassWd == userPasswd {
 			msg.Code = 200
 		} else {
 			msg.Code = 400
@@ -64,7 +61,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func main() {
-	http.HandleFunc("/", sayhelloName)
+	http.HandleFunc("/", sayHelloName)
 	http.HandleFunc("/login", login)
 	err := http.ListenAndServe(":80", nil)
 	if err != nil {

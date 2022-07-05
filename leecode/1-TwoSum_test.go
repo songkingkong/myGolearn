@@ -1,8 +1,11 @@
-package twosum
+package leecode
 
 //一个数组，一个值，取数组内两个数和等于值的两个数的下标
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 func twoSum(nums []int, target int) []int {
 	hashTable := map[int]int{}
@@ -14,7 +17,7 @@ func twoSum(nums []int, target int) []int {
 	}
 	return nil
 }
-func twosum() {
+func TestTwoSum(t *testing.T) {
 	list := []int{4, 5, 6, 7, 8}
 	a := twoSum(list, 15)
 	fmt.Println(a)

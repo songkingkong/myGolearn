@@ -1,8 +1,9 @@
-package main
+package modellearn
 
 import (
 	"os"
 	"strings"
+	"testing"
 
 	"gopkg.in/alecthomas/kingpin.v2"
 )
@@ -24,14 +25,14 @@ var (
 	postText = post.Arg("text", "Text to post.").Default("hello world").Strings()
 )
 
-func main() {
+func TestKingpin(t *testing.T) {
 	//从os接收参数传给kingpin处理
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 	case register.FullCommand():
 		println("name:" + *registerName)
 		println("pwd:" + *registerPwd)
 	case post.FullCommand():
-		println((*postImage))
+		println(*postImage)
 		text := strings.Join(*postText, " ")
 		println("Post:", text)
 	}

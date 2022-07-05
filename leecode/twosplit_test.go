@@ -1,6 +1,9 @@
-package main
+package leecode
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 var list = []int{1, 2, 3, 4, 5, 6, 7}
 var v = 2
@@ -22,7 +25,7 @@ func binarySearch(arr []int, k int) int {
 	}
 	return -1
 }
-func main() {
+func TestTwosplit(t *testing.T) {
 	a := binarySearch(list, v)
 	fmt.Println(a)
 }

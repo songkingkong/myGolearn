@@ -1,6 +1,9 @@
-package main
+package syntax
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 /*
 len()可以用来查看数组或slice的长度
@@ -17,7 +20,7 @@ var s0 = make([]string, 2)
 var s1 []int
 var s2 = []string{"eee", "fff"}
 
-func main() {
+func TestSlice(t *testing.T) {
 	s0[0] = "aaa"
 	s0[1] = "bbb"
 	s0 = append(s0, "ccc")

@@ -1,6 +1,9 @@
-package main
+package syntax
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 /*结构体创建方式1*/
 type Movie struct {
@@ -14,7 +17,7 @@ type Movie1 struct {
 	Rating float32
 }
 
-func main() {
+func TestStruct(t *testing.T) {
 	m := Movie{
 		Name:   "King",
 		Rating: 10,

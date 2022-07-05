@@ -1,10 +1,11 @@
 /*
 数组类型的应用
 */
-package main
+package syntax
 
 import (
 	"fmt"
+	"testing"
 )
 
 /*
@@ -31,7 +32,7 @@ var arr4 = [2][2]int{{1, 2}, {3, 4}}
 获取数组内参数的方式：arr1[0]
 */
 
-func main() {
+func TestArray(t *testing.T) {
 	arr3[0] = 6
 	arr3[1] = 7
 	fmt.Println(arr1, arr3)

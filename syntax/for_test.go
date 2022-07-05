@@ -1,8 +1,11 @@
-package main
+package syntax
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
-func main() {
+func TestFor(t *testing.T) {
 	m1 := map[string]int{"a": 1, "b": 2}
 	/* for循环内 k 等于下标，v等于值 */
 	for k, v := range m1 {

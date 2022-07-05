@@ -1,11 +1,14 @@
-package main
+package syntax
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 var players = make(map[string]int, 10)
 var players1 = map[string]int{}
 
-func main() {
+func TestMap(t *testing.T) {
 	players2 := map[string]int{"one": 1, "two": 2}
 	players3 := map[string]int{}
 	players3["players3_key"] = 3
